@@ -82,9 +82,9 @@ const App: React.FC = () => {
                   <div className="flex items-center justify-center mb-4">
                     <Sparkles className="text-[#c8a97e] w-8 h-8" />
                   </div>
-                  <h1 className="font-['Playfair_Display'] text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                  <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                    Exclusive Designer Fans Collection
-                  </h1>
+                  </h2>
                   <p className="text-gray-600 text-lg font-light max-w-xl mx-auto">
                     Discover our curated catalogue of premium designs. Complete the form below to receive instant access.
                   </p>
