@@ -9,18 +9,18 @@ const Footer = () => {
             <h3 className="font-['Playfair_Display'] text-xl font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/terms" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
+                <a href="https://magnific.in/terms-and-conditions/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
                   Terms and Conditions
                 </a>
               </li>
               <li>
-                <a href="/privacy" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
+                <a href="https://magnific.in/privacy-policy/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="/disclaimer" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
-                  Disclaimer
+                <a href="https://magnific.in/blog" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
+                 Blogs
                 </a>
               </li>
             </ul>
@@ -29,12 +29,12 @@ const Footer = () => {
             <h3 className="font-['Playfair_Display'] text-xl font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/about" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
+                <a href="https://magnific.in/about-us/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="/contact" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
+                <a href="https://magnific.in/contact-us/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#1a5f7a] transition-colors">
                   Contact
                 </a>
               </li>

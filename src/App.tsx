@@ -83,7 +83,7 @@ const App: React.FC = () => {
                     <Sparkles className="text-[#c8a97e] w-8 h-8" />
                   </div>
                   <h1 className="font-['Playfair_Display'] text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                   Magnific's Exclusive Collection
+                   Exclusive Designer Fans Collection
                   </h1>
                   <p className="text-gray-600 text-lg font-light max-w-xl mx-auto">
                     Discover our curated catalogue of premium designs. Complete the form below to receive instant access.
