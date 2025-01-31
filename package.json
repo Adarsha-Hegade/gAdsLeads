@@ -1,13 +1,16 @@
 {
   "name": "magnific-lead-form",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc -p tsconfig.app.json && vite build",
+    "build:api": "tsc -p tsconfig.node.json",
+    "predeploy": "npm run build && npm run build:api",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.7",
