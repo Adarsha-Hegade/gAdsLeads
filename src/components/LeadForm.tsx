@@ -81,7 +81,7 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
           type="text"
           {...register('name', { 
             required: 'Name is required',
-            minLength: { value: 2, message: 'Name must be at least 2 characters' }
+            minLength: { value: 2, message: 'Name must be at least 3 characters' }
           })}
           placeholder="Your Name"
           autoComplete="name"
@@ -113,7 +113,7 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
           type="text"
           {...register('city', { 
             required: 'City is required',
-            minLength: { value: 2, message: 'City name must be at least 2 characters' }
+            minLength: { value: 2, message: 'City name must be at least 3 characters' }
           })}
           placeholder="Your City"
           autoComplete="address-level2"
