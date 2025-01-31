@@ -108,8 +108,6 @@
 // `;
 
 
-
-
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import nodemailer from 'nodemailer';
 
@@ -218,4 +216,3 @@ const createEmailHTML = (data: any) => `
 </body>
 </html>
 `;
-
