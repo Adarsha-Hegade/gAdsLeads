@@ -4,19 +4,21 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import { FormData } from '../types';
 import { Loader, Send } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { sendEmail } from '../lib/email';
 
 const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ onSubmit }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>();
   
   React.useEffect(() => {
+    // Set default country code for India (+91)
     setValue('phone', '+91 ');
   }, [setValue]);
 
   const onSubmitForm = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      // Store in Supabase
+      // First, store in Supabase
       const { error } = await supabase
         .from('leads')
         .insert([
@@ -34,24 +36,17 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
         throw error;
       }
 
-      // Send email notification
-      const emailResponse = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: data.name,
-          phone: data.phone,
-          city: data.city,
-          email: data.email,
-          url_slugs: window.location.pathname.split('/').filter(Boolean)
-        }),
+      // Then send email notification
+      const emailResult = await sendEmail({
+        ...data,
+        url_slugs: window.location.pathname.split('/').filter(Boolean)
       });
 
-      if (!emailResponse.ok) {
-        console.error('Failed to send email');
+      if (!emailResult.success) {
+        console.error('Email sending failed');
       }
 
-      // Show success regardless of email status
+      // Call onSubmit to show success modal regardless of email status
       await onSubmit(data);
     } catch (error) {
       console.error('Form submission error:', error);
@@ -163,4 +158,4 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
   );
 };
 
-export default LeadForm;
+export default LeadForm

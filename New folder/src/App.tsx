@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import LeadForm from './components/LeadForm';
 import SuccessModal from './components/SuccessModal';
 import Header from './components/Header';
@@ -10,11 +10,10 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { Sparkles } from 'lucide-react';
 
-const MainContent: React.FC = () => {
+const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSuccess, setShowSuccess] = useState(false);
   const location = useLocation();
-  const formRef = useRef<HTMLDivElement>(null);
   
   const slugs = location.pathname.split('/').filter(Boolean);
   const redirectUrl = `https://magnific.in${location.pathname}`;
@@ -23,17 +22,6 @@ const MainContent: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Scroll to form after loading with a small delay to ensure smooth transition
-      setTimeout(() => {
-        if (formRef.current) {
-          const headerHeight = 80; // Approximate header height
-          const offset = formRef.current.offsetTop - headerHeight;
-          window.scrollTo({
-            top: offset,
-            behavior: 'smooth'
-          });
-        }
-      }, 100);
     }, 500);
 
     return () => clearTimeout(timer);
@@ -62,6 +50,7 @@ const MainContent: React.FC = () => {
       setShowSuccess(true);
     } catch (error) {
       console.error('Error handling submission:', error);
+      // Still show success even if email fails
       setShowSuccess(true);
     }
   };
@@ -80,10 +69,7 @@ const MainContent: React.FC = () => {
         }}
       >
         <div className="max-w-3xl mx-auto">
-          <div 
-            ref={formRef}
-            className="backdrop-blur-md bg-white/80 rounded-2xl shadow-2xl p-8 md:p-12"
-          >
+          <div className="backdrop-blur-md bg-white/80 rounded-2xl shadow-2xl p-8 md:p-12">
             {isLoading ? (
               <div className="space-y-6">
                 <Skeleton height={50} />
@@ -97,7 +83,7 @@ const MainContent: React.FC = () => {
                     <Sparkles className="text-[#c8a97e] w-8 h-8" />
                   </div>
                   <h2 className="font-['Playfair_Display'] text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                    Exclusive Designer Fans Collection
+                   Exclusive Designer Fans Collection
                   </h2>
                   <p className="text-gray-600 text-lg font-light max-w-xl mx-auto">
                     Discover our curated catalogue of premium designs. Complete the form below to receive instant access.
@@ -121,14 +107,6 @@ const MainContent: React.FC = () => {
         />
       )}
     </div>
-  );
-};
-
-const App: React.FC = () => {
-  return (
-    <Routes>
-      <Route path="/*" element={<MainContent />} />
-    </Routes>
   );
 };
 
