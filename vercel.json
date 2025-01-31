@@ -7,8 +7,6 @@
       "memory": 1024,
       "maxDuration": 10
     }
-  },
-  "env": {
-    "VITE_SMTP2GO_API_KEY": "@vite_smtp2go_api_key"
   }
+
 }
