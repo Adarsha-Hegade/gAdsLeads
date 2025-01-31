@@ -107,8 +107,8 @@
 // </html>
 // `;
 
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createTransport } from 'nodemailer';
+import { VercelRequest, VercelResponse } from '@vercel/node';
+import nodemailer from 'nodemailer';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
@@ -117,9 +117,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const data = req.body;
-    
-    const transporter = createTransport({
-      host: "mail.smtp2go.com",
+
+    const transporter = nodemailer.createTransport({
+      host: 'mail.smtp2go.com',
       port: 587,
       secure: false,
       auth: {
@@ -145,7 +145,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 }
 
-const createTextBody = (data: any) => `
+const createTextBody = (data: unknown) => `
 New Lead Notification
 --------------------
 
@@ -160,7 +160,7 @@ Source Information:
 - Timestamp: ${new Date().toLocaleString()}
 `;
 
-const createEmailHTML = (data: any) => `
+const createEmailHTML = (data: unknown) => `
 <!DOCTYPE html>
 <html>
 <head>
@@ -174,11 +174,11 @@ const createEmailHTML = (data: any) => `
       <h1 style="color: #ffffff; font-family: 'Playfair Display', serif; margin: 0; font-size: 28px;">New Lead Notification</h1>
       <p style="color: #c8a97e; margin: 10px 0 0;">Exclusive Collection Inquiry</p>
     </div>
-    
+
     <div style="background: white; padding: 30px; border-radius: 0 0 16px 16px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
       <div style="margin-bottom: 25px;">
         <h2 style="color: #1a5f7a; font-size: 20px; margin: 0 0 20px;">Lead Details</h2>
-        
+
         <table style="width: 100%; border-collapse: collapse;">
           <tr>
             <td style="padding: 12px; border-bottom: 1px solid #eee; color: #666;">Name</td>
@@ -207,7 +207,7 @@ const createEmailHTML = (data: any) => `
         <p style="margin: 5px 0 0; color: #666;">Timestamp: ${new Date().toLocaleString()}</p>
       </div>
     </div>
-    
+
     <div style="text-align: center; padding: 20px; color: #666; font-size: 12px;">
       <p style="margin: 0;">This is an automated notification from Magnific Lead Collection System</p>
     </div>
