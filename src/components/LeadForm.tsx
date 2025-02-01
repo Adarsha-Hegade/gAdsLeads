@@ -16,7 +16,6 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
   const onSubmitForm = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      // Store in Supabase
       const { error } = await supabase
         .from('leads')
         .insert([
@@ -29,14 +28,10 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
           }
         ]);
 
-      if (error) {
-        console.error('Supabase request failed', error);
-        throw error;
-      }
+      if (error) throw error;
 
       await onSubmit(data);
     } catch (error) {
-      console.error('Form submission error:', error);
       await onSubmit(data);
     } finally {
       setIsSubmitting(false);

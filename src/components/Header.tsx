@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Header = () => {
   return (
     <header className="w-full py-6 px-4 backdrop-blur-md bg-[#f3f3f4]">
