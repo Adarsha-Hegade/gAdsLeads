@@ -1,12 +1,15 @@
 import { MessageCircle } from 'lucide-react';
 import { getLocationInfo } from '../lib/tracking';
-const locationInfo = await getLocationInfo();
-const WhatsAppButton = () => {
+const locationInfo =  getLocationInfo();
+console.log(locationInfo);
+
+const WhatsAppButton =  () => {
   const phoneNumber = '919513866001';
-  const place=locationInfo || 'my city';
+  const place=locationInfo;
+  console.log(place);
   const message = encodeURIComponent(`Hi I'm looking for designer fans at ${place}`);
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-
+  
   return (
     <a
       href={whatsappUrl}
