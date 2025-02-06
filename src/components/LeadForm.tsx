@@ -116,12 +116,13 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
           className="luxury-input"
           defaultValue=""
         >
+          
           <option value="" disabled>Please select</option>
+           <option value="individual">Looking to buy</option>
+           <option value="just_curious">Just curious</option>
           <option value="architect">Architect</option>
           <option value="interior_designer">Interior Designer</option>
-          <option value="individual">Individual Buyer</option>
-          <option value="dealer">Just Curious</option>
-          <option value="dealer">Other</option>
+          <option value="other">Other</option>
           
         </select>
         {errors.lead_type && (
