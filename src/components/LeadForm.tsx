@@ -4,6 +4,7 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import { FormData } from '../types';
 import { Loader, Send } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { getDeviceInfo, getLocationInfo } from '../lib/tracking';
 
 const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ onSubmit }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,6 +17,9 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
   const onSubmitForm = async (data: FormData) => {
     setIsSubmitting(true);
     try {
+      const deviceInfo = getDeviceInfo();
+      const locationInfo = await getLocationInfo();
+
       const { error } = await supabase
         .from('leads')
         .insert([
@@ -24,6 +28,10 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
             phone: data.phone,
             city: data.city,
             email: data.email || null,
+            lead_type: data.lead_type,
+            comments: data.comments || null,
+            device_info: deviceInfo,
+            location_info: locationInfo,
             url_slugs: window.location.pathname.split('/').filter(Boolean)
           }
         ]);
@@ -101,6 +109,27 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
       </div>
 
       <div className="relative">
+        <select
+          {...register('lead_type', {
+            required: 'Please select your profession'
+          })}
+          className="luxury-input"
+          defaultValue=""
+        >
+          <option value="" disabled>Please select</option>
+          <option value="architect">Architect</option>
+          <option value="interior_designer">Interior Designer</option>
+          <option value="individual">Individual Buyer</option>
+          <option value="dealer">Just Curious</option>
+          <option value="dealer">Other</option>
+          
+        </select>
+        {errors.lead_type && (
+          <p className="mt-1 text-sm text-red-500">{errors.lead_type.message}</p>
+        )}
+      </div>
+
+      <div className="relative">
         <input
           type="email"
           {...register('email', {
@@ -116,6 +145,14 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
         {errors.email && (
           <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
         )}
+      </div>
+
+      <div className="relative">
+        <textarea
+          {...register('comments')}
+          placeholder="Your Message (Optional)"
+          className="luxury-input min-h-[100px] resize-y"
+        />
       </div>
 
       <button

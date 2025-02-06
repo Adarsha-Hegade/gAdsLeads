@@ -3,6 +3,8 @@ export interface FormData {
   phone: string;
   city: string;
   email?: string;
+  lead_type: string;
+  comments?: string;
 }
 
 export interface LeadFormProps {

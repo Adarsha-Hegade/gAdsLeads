@@ -10,6 +10,10 @@ export interface Database {
           email: string | null;
           url_slugs: string[] | null;
           created_at: string;
+          lead_type: string | null;
+          device_info: Record<string, any> | null;
+          location_info: Record<string, any> | null;
+          comments: string | null;
         };
         Insert: {
           id?: string;
@@ -19,6 +23,10 @@ export interface Database {
           email?: string | null;
           url_slugs?: string[] | null;
           created_at?: string;
+          lead_type?: string | null;
+          device_info?: Record<string, any> | null;
+          location_info?: Record<string, any> | null;
+          comments?: string | null;
         };
         Update: {
           id?: string;
@@ -28,6 +36,10 @@ export interface Database {
           email?: string | null;
           url_slugs?: string[] | null;
           created_at?: string;
+          lead_type?: string | null;
+          device_info?: Record<string, any> | null;
+          location_info?: Record<string, any> | null;
+          comments?: string | null;
         };
       };
     };
