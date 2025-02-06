@@ -122,7 +122,7 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
            <option value="individual">I'm Looking to buy</option>
            <option value="just_curious">I'm Just curious</option>
           <option value="architect">I'm an Architect</option>
-          <option value="interior_designer">I'm anInterior Designer</option>
+          <option value="interior_designer">I'm an Interior Designer</option>
           <option value="other">Other</option>
           
         </select>
