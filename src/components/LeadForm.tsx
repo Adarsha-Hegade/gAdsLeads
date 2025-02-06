@@ -19,19 +19,20 @@ const LeadForm: React.FC<{ onSubmit: (data: FormData) => Promise<void> }> = ({ o
     try {
       const deviceInfo = getDeviceInfo();
       const locationInfo = await getLocationInfo();
-console.log(locationInfo);
+     
+
       const { error } = await supabase
         .from('leads')
         .insert([
           {
             name: data.name,
             phone: data.phone,
-            city: data.city,
+            city: locationInfo,
             email: data.email || null,
             lead_type: data.lead_type,
             comments: data.comments || null,
             device_info: deviceInfo,
-            location_info: locationInfo,
+            location_info: data.city,
             url_slugs: window.location.pathname.split('/').filter(Boolean)
           }
         ]);
@@ -93,7 +94,7 @@ console.log(locationInfo);
       </div>
 
       <div className="relative">
-        <input
+        {/* <input
           type="text"
           {...register('city', { 
             required: 'City is required',
@@ -105,13 +106,13 @@ console.log(locationInfo);
         />
         {errors.city && (
           <p className="mt-1 text-sm text-red-500">{errors.city.message}</p>
-        )}
+        )} */}
       </div>
 
       <div className="relative">
         <select
           {...register('lead_type', {
-            required: 'Please select your profession'
+            required: 'Please select an option'
           })}
           className="luxury-input"
           defaultValue=""
@@ -131,7 +132,7 @@ console.log(locationInfo);
       </div>
 
       <div className="relative">
-        <input
+        {/* <input
           type="email"
           {...register('email', {
             pattern: {
@@ -145,7 +146,7 @@ console.log(locationInfo);
         />
         {errors.email && (
           <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-        )}
+        )} */}
       </div>
 
       <div className="relative">
